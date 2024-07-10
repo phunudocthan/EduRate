@@ -4,6 +4,7 @@
  */
 package Controller;
 
+import DAOs.SchoolDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -34,7 +35,7 @@ public class MainPage extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet MainPage</title>");            
+            out.println("<title>Servlet MainPage</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet MainPage at " + request.getContextPath() + "</h1>");
@@ -72,7 +73,16 @@ public class MainPage extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String schoolId = request.getParameter("schoolId");
+        String rating = request.getParameter("rating");
+
+        SchoolDAO schoolDao = new SchoolDAO();
+        boolean check = schoolDao.updateRatingInDatabase(schoolId, Integer.parseInt(rating));
+        if (check) {
+            response.sendRedirect("/MainPage/Main");
+        } else {
+            response.sendRedirect("/MainPage/Main");
+        }
     }
 
     /**

@@ -121,7 +121,7 @@ public class UserDAO extends DBConnect {
                 + "						join Ward w on  us.WardID=w.WardID\n"
                 + "						Join Gender g on us.GenderID=g.GenderID\n"
                 + "						join TagCategory tc on us.TagID=tc.TagID\n"
-                + "						Left Join Phone ph on us.UserID =ph.UserID\n" 
+                + "						Left Join Phone ph on us.UserID =ph.UserID\n"
                 + "                                             left Join Email e on us.UserID=e.UserID\n"
                 + "                                              where us.UserName=?";
         Connection conn = DBConnect.getConnection();
@@ -131,4 +131,14 @@ public class UserDAO extends DBConnect {
         return rs;
     }
 
+    public ResultSet getRole(String username) throws SQLException {
+        ResultSet rs = null;
+        String sql = "Select rl.Role From [User] us join [Role] rl on us.RoleID=rl.RoleID\n"
+                + "where UserName=?";
+         Connection conn = DBConnect.getConnection();
+         PreparedStatement st = conn.prepareStatement(sql);
+         st.setString(1,username);
+         rs=st.executeQuery();
+         return rs;
+    }
 }
