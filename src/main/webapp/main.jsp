@@ -460,9 +460,9 @@
     <body>
         <sql:setDataSource var="conn"
                            driver="com.microsoft.sqlserver.jdbc.SQLServerDriver"
-                           url="jdbc:sqlserver://ASUS3DK\\CHIBANG:1433;databaseName=EduReview;encrypt=true;trustServerCertificate=true;"
+                           url="jdbc:sqlserver://LAPTOP-5GM0A01J\\PHAMHOANGTHONG:1433;databaseName=PrjDB;encrypt=true;trustServerCertificate=true;"
                            user="sa"
-                           password="sa123" />
+                           password="Thangmap145" />
         <sql:query dataSource="${conn}" var="rsSchool">
             Select SchoolID, SchoolName, EstablishedDate, ReviewScore, 
             (p.ProvinceName + ', ' + d.DistrictName + ', ' + w.WardName) as [Address],
@@ -545,7 +545,7 @@
                     </li>
 
                     <li>
-                        <a href="signout.jsp">
+                        <a href="/SignOut">
                             <span class="icon">
                                 <ion-icon name="log-out-outline"></ion-icon>
                             </span>
