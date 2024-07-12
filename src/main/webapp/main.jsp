@@ -460,9 +460,9 @@
     <body>
         <sql:setDataSource var="conn"
                            driver="com.microsoft.sqlserver.jdbc.SQLServerDriver"
-                           url="jdbc:sqlserver://LAPTOP-5GM0A01J\\PHAMHOANGTHONG:1433;databaseName=PrjDB;encrypt=true;trustServerCertificate=true;"
+                           url="jdbc:sqlserver://ASUS3DK\\CHIBANG:1433;databaseName=EduReview;encrypt=true;trustServerCertificate=true;"
                            user="sa"
-                           password="Thangmap145" />
+                           password="sa123" />
         <sql:query dataSource="${conn}" var="rsSchool">
             Select SchoolID, SchoolName, EstablishedDate, ReviewScore, 
             (p.ProvinceName + ', ' + d.DistrictName + ', ' + w.WardName) as [Address],
