@@ -17,8 +17,8 @@
         <servlet-class>Controller.GetDistrict</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>UserInfo</servlet-name>
-        <servlet-class>Controller.UserInfo</servlet-class>
+        <servlet-name>StatisticServlet</servlet-name>
+        <servlet-class>Controller.StatisticServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>UserServlet</servlet-name>
@@ -38,23 +38,23 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>MainPage</servlet-name>
-        <url-pattern>/MainPage/*</url-pattern>
+        <url-pattern>/EduRate/*</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>GetDistrict</servlet-name>
         <url-pattern>/GetDistrict</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>UserInfo</servlet-name>
-        <url-pattern>/UserInfo/*</url-pattern>
+        <servlet-name>StatisticServlet</servlet-name>
+        <url-pattern>/EduRate/Statistic</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>UserServlet</servlet-name>
-        <url-pattern>/UserServlet/*</url-pattern>
+        <url-pattern>/EduRate/Profile/*</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>SignOutServlet</servlet-name>
-        <url-pattern>/SignOutServlet</url-pattern>
+        <url-pattern>/EduRate/SignOut</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -57,8 +57,8 @@ public class MainPage extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String path = request.getRequestURI();
-        if (path.equals("/MainPage/Main")) {
-            request.getRequestDispatcher("/main.jsp").forward(request, response);
+        if (path.equals("/EduRate/Home") || path.equals("/EduRate")) {
+            request.getRequestDispatcher("/index.jsp").forward(request, response);
         }
     }
 
@@ -79,9 +79,9 @@ public class MainPage extends HttpServlet {
         SchoolDAO schoolDao = new SchoolDAO();
         boolean check = schoolDao.updateRatingInDatabase(schoolId, Integer.parseInt(rating));
         if (check) {
-            response.sendRedirect("/MainPage/Main");
+            response.sendRedirect("/EduRate/Home");
         } else {
-            response.sendRedirect("/MainPage/Main");
+            response.sendRedirect("/EduRate/Home");
         }
     }
 

@@ -5,7 +5,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Register Page</title>
+        <title>Education Rating</title>
         <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     </head>
     <body>
