@@ -488,13 +488,21 @@
 
         <%
             String userRole = "";
-            String user = (String) session.getAttribute("SessionName");
-            UserDAO dao = new UserDAO();
-            ResultSet rs = dao.getRole(user);
-            if (rs.next()) {
-                userRole = rs.getString("Role");
+            String user = "";
+            if (session.getAttribute("SessionName") != null) {
+                user = (String) session.getAttribute("SessionName");
             }
-        %>  
+
+            if (!user.isEmpty()) {
+                UserDAO dao = new UserDAO();
+                ResultSet rs = dao.getRole(user);
+                if (rs.next()) {
+                    userRole = rs.getString("Role");
+                }
+            }
+
+            String link = user.isEmpty() ? "/RegisterServlet/Register" : "/UserInfo/User/" + user;
+        %>
         <!-- =============== Navigation ================ -->
         <div class="container">
             <div class="navigation">
@@ -518,7 +526,7 @@
                     </li>
 
                     <li>
-                        <a href="/UserInfo/User/<%=user%>">
+                        <a href="<%= link%>" >
                             <span class="icon">
                                 <ion-icon name="person-outline"></ion-icon>
                             </span>
@@ -593,7 +601,7 @@
                     <div id="college" class="rating-cards">
                         <c:forEach var="college" items="${rsCollege.rows}">
                             <div class="rating-card" data-name="${college.SchoolName}">
-                                <img src="${college.Picture}" alt="${college.SchoolName}" />
+                                <img src="<%= request.getContextPath()%>/${college.Picture}" alt="${college.SchoolName}" width="200" />
                                 <div class="rating-details">
                                     <h2>${college.SchoolName}</h2>
                                     <p>${college.Description}</p>
@@ -612,8 +620,12 @@
                                 <%
                                     if (userRole.equals("Admin")) {
                                 %>    
-                                <div><a href="">Edit</a></div>
-                                <div><a href="">Delete</a></div>
+                                <div>
+                                    <button onclick="location.href = '/EditServlet/Edit/${college.SchoolID}'" class="btn btn-primary btn-sm">Edit</button>
+                                </div>
+                                <div>
+                                    <button onclick="confirmDelete('${college.SchoolID}')" class="btn btn-danger btn-sm">Delete</button>
+                                </div>
                                 <%
                                     }
                                 %>
@@ -624,7 +636,7 @@
                     <div id="university" class="rating-cards active">
                         <c:forEach var="school" items="${rsSchool.rows}">
                             <div class="rating-card" data-name="${school.SchoolName}">
-                                <img src="${school.Picture}" alt="${school.SchoolName}" />
+                                <img src="<%=request.getContextPath()%>/${college.Picture}" alt="${school.SchoolName}" width="200" />
                                 <div class="rating-details">
                                     <h2>${school.SchoolName}</h2>
                                     <p>${school.Description}</p>
@@ -643,40 +655,57 @@
                                 <%
                                     if (userRole.equals("Admin")) {
                                 %>    
-                                <div><a href="">Edit</a></div>
-                                <div><a href="">Delete</a></div>
+                                <div>
+                                    <button onclick="location.href = '/EditServlet/Edit/${school.SchoolID}'" class="btn btn-primary btn-sm">Edit</button>
+                                </div>
+                                <div>
+                                    <button onclick="confirmDelete('${school.SchoolID}')" class="btn btn-danger btn-sm">Delete</button>
+                                </div>
                                 <%
                                     }
                                 %>
                             </div>
                         </c:forEach>
                     </div>
+                    <%
+                        if (userRole.equals("Admin")) {
+                    %>    
+                    <button onclick="location.href = '/CreateServlet/AddNew'">Add new School</button>
+                    <%
+                        }
+                    %>
                 </div>
             </div>
         </div>
-
+        <script>
+            function confirmDelete(schoolID) {
+                if (confirm('Are you sure you want to delete this school?')) {
+                    location.href = '/DeleteServlet/Delete/' + schoolID;
+                }
+            }
+        </script>
         <script type="module" src="https://cdn.jsdelivr.net/npm/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
         <script nomodule src="https://cdn.jsdelivr.net/npm/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script>
-                                // Menu Toggle
-                                let toggle = document.querySelector(".toggle");
-                                let navigation = document.querySelector(".navigation");
-                                let main = document.querySelector(".main");
+            // Menu Toggle
+            let toggle = document.querySelector(".toggle");
+            let navigation = document.querySelector(".navigation");
+            let main = document.querySelector(".main");
 
-                                toggle.onclick = function () {
-                                    navigation.classList.toggle("active");
-                                    main.classList.toggle("active");
-                                };
+            toggle.onclick = function () {
+                navigation.classList.toggle("active");
+                main.classList.toggle("active");
+            };
 
-                                // Add hovered class in selected list item
-                                let list = document.querySelectorAll(".navigation li");
+            // Add hovered class in selected list item
+            let list = document.querySelectorAll(".navigation li");
 
-                                function activeLink() {
-                                    list.forEach((item) => item.classList.remove("hovered"));
-                                    this.classList.add("hovered");
-                                }
-                                list.forEach((item) => item.addEventListener("mouseover", activeLink));
+            function activeLink() {
+                list.forEach((item) => item.classList.remove("hovered"));
+                this.classList.add("hovered");
+            }
+            list.forEach((item) => item.addEventListener("mouseover", activeLink));
         </script>
 
         <script>
