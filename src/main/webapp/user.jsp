@@ -10,7 +10,7 @@
     <head>
         <meta charset="UTF-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-        <title>Account Settings</title>
+        <title>Education Rating</title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"/>
         <style>
@@ -165,9 +165,9 @@
     <body>
         <sql:setDataSource var="conn"
                            driver="com.microsoft.sqlserver.jdbc.SQLServerDriver"
-                           url="jdbc:sqlserver://ASUS3DK\\CHIBANG:1433;databaseName=EduReview;encrypt=true;trustServerCertificate=true;"
+                           url="jdbc:sqlserver://LAPTOP-FV3VVLHK\\MAY1:1433;databaseName=EduRate;encrypt=true;trustServerCertificate=true;"
                            user="sa"
-                           password="sa123"/>
+                           password="Hoangphuc29"/>
         <sql:query dataSource="${conn}" var="rsTag">
             SELECT TagID, TagCategory FROM TagCategory
         </sql:query>
